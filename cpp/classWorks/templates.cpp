@@ -7,9 +7,9 @@ T add(T x, T y='1'){
   return x+y;
 }
 
-template<typename T>
-void printText(T value){
-  cout << value << endl;
+template<typename T, typename U>
+void printText(T value, U second){
+  cout << value << '\t' << second << endl;
 }
 
 int main (int argc, char *argv[]) {
