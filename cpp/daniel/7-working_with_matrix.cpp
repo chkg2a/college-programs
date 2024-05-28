@@ -91,12 +91,13 @@ class Matrix{
 int main (int argc, char *argv[]) {
   srand(time(0));
   Matrix mat1(true);
-  // Matrix mat2(true);
+  Matrix mat2(true);
   Matrix mat3;
   mat1.displayValue();
   cout << "--------" << endl;
-  mat1.transposeMat();
-  mat1.displayValue();
+  mat3 = mat1 * mat2;
+  // mat1.transposeMat();
+  mat3.displayValue();
   return 0;
 
 }
