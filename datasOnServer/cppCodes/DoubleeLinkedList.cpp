@@ -102,6 +102,35 @@ void delRear(DList l) {
   delete current;
 }
 
+DList dllFind(DList l, int data){
+  if (isEmpty(l)) {
+    return NULL;
+  }
+  DList current = l;
+  while (current->next != NULL){
+      if(current->data == data){
+          return current;
+      }
+      current = current->next;
+  }
+  return NULL;
+}
+
+DList dllAddToLoc(DList l, int data){
+  if (isEmpty(l)) {
+    return NULL;
+  }
+  DList newNode = getNode(data);
+  DList current = l;
+  newNode->next = current->next;
+  current->next = newNode;
+  newNode->prev = current;
+  if(current->next != NULL){
+      current->next->prev = newNode;
+  }
+  return NULL;
+}
+
 DList listMerge(DList A, DList B) {
   if (isEmpty(A) && isEmpty(B)) {
     cerr << "Lists are empty" << endl;
@@ -147,25 +176,19 @@ int main() {
   DList dl = initializeNode();
   DList dl2 = initializeNode();
 
-  for (int i = 0; i < 100; i++) {
-    addRear(dl, i);
-  }
-  for (int i = 100; i < 200; i++) {
-    addRear(dl2, i);
-  }
-
-  for (int i = 0; i < 100; i++) {
-    delFront(dl);
-  }
-  // displayList(dl2);
-
-  DList dl3 = listMerge(dl,dl2);
-  displayList(dl3);
-
+  addFront(dl,-10);
+  addFront(dl,-20);
+  addRear(dl,0);
+  addRear(dl,10);
+  addRear(dl,20);
+  cout << "1st Display\n";
+  delFront(dl);
+  delRear(dl);
+  displayList(dl);
+  dllAddToLoc(dllFind(dl,0),5);
+  cout << "2nd Display\n";
+  displayList(dl);
   destroy(dl);
-  destroy(dl2);
-  destroy(dl3);
-
 
   return 0;
 }

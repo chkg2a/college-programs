@@ -97,6 +97,31 @@ void destroy(List l){
   l = NULL;
 }
 
+List listFind(List l, int data){
+  if (listEmpty(l)) {
+    return NULL;
+  }
+  List current = l;
+  while (current->next != NULL){
+      if(current->data == data){
+          return current;
+      }
+      current = current->next;
+  }
+  return NULL;
+}
+
+List listAddToLoc(List l, int data){
+  if (listEmpty(l)) {
+    return NULL;
+  }
+  List newNode = getNode(data);
+  List current = l;
+  newNode->next = current->next;
+  current->next = newNode;
+  return NULL;
+}
+
 List listMerge(List A, List B) {
   if (listEmpty(A) && listEmpty(B)) {
     cerr << "Lists are empty" << endl;
