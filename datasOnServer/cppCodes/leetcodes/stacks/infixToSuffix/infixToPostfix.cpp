@@ -30,7 +30,7 @@ void postFix(string & infix, string & postfix){
             push(&s, symb);
         }
         else if(symb == ')'){
-            while(peakTop(&s) != '('){
+            while(stackTop(&s) != '('){
                 postfix += pop(&s);
             }
             pop(&s);
@@ -39,14 +39,14 @@ void postFix(string & infix, string & postfix){
             postfix += symb;
         }
         else if(isOperator(symb)){
-            while(!isEmpty(&s) && precedence(peakTop(&s)) >= precedence(symb) ){
+            while(!stack_empty(&s) && precedence(stackTop(&s)) >= precedence(symb) ){
                 postfix += pop(&s);
             }
             push(&s, symb);
         }
         inpos++;
     }
-    while (!isEmpty(&s)){
+    while (!stack_empty(&s)){
         postfix += pop(&s);
     }
 }
