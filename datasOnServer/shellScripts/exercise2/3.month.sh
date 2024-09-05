@@ -1,5 +1,5 @@
 #!/bin/bash
 
-export month="August"
+set -- $(date +%B)
 
-echo $(set | grep month | awk -F= '{print $3}' | awk '{print $1}')
+echo $1
