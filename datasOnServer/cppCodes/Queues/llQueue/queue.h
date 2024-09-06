@@ -13,5 +13,6 @@ bool queueEmpty(Queue);
 void enqueue(Queue, int);
 int dequeue(Queue);
 int peak(Queue);
+void display(Queue);
 
 #endif

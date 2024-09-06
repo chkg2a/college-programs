@@ -34,7 +34,9 @@ void addFront(DList l, int val) {
   DList head = l;
   node->next = head->next;
   node->prev = head;
-  head->next->prev = node;
+  if(head->next != NULL){
+    head->next->prev = node;
+  }
   head->next = node;
 }
 

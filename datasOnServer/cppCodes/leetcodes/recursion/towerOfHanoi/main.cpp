@@ -8,7 +8,7 @@ void tower(int n, char from, char to, char aux){
     }
     else{
         tower(n-1, from, aux, to);
-        cout << "Move disc " << n << " from " << from << " to " << to << "\n";
+        cout << "Move disk " << n << " from " << from << " to " << to << "\n";
         tower(n-1,aux,to, from);
     }
 }

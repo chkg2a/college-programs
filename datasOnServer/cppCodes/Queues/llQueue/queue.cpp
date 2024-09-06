@@ -1,3 +1,4 @@
+#include<iostream>
 #include"queue.h"
 
 Queue init(){
@@ -42,4 +43,12 @@ int dequeue(Queue head){
 
 int peak(Queue head){
   return head->next->data;
+}
+
+void display(Queue head){
+  Queue current = head->next;
+  while(current != nullptr){
+    std::cout << current->data << "->";
+    current = current->next;
+  }
 }

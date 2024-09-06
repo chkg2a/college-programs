@@ -9,6 +9,6 @@ int main(){
   enqueue(q,10);
   enqueue(q,20);
   dequeue(q);
-  cout << peak(q) << endl;
+  display(q);
   return 0;
 }
