@@ -4,7 +4,7 @@
 #define FALSE 0
 using namespace std;
 
-typedef struct queue{
+typedef struct queue {
   int items[MAXSIZE];
   int F, R;
 } Queue;
@@ -14,57 +14,51 @@ int dequeue(queue *);
 int queue_empty(queue *);
 void display(queue *);
 
-int main () {
+int main() {
   queue q;
   q.F = -1, q.R = -1;
-  enqueue(&q,10);
-  enqueue(&q,20);
-  enqueue(&q,30);
-  // display(&q);
-  dequeue(&q);
+  enqueue(&q, 10);
+  enqueue(&q, 20);
+  enqueue(&q, 30);
   display(&q);
 
   return 0;
 }
 
-int queue_empty(queue * q){
-  if(q->F == -1){
+int queue_empty(queue *q) {
+  if (q->F == -1) {
     return TRUE;
   }
   return FALSE;
 }
 
-void enqueue(queue * q, int val){
-  if((q->F == 0) && (q->R == MAXSIZE-1) || (q->F == q->R+1)){
+void enqueue(queue *q, int val) {
+  if ((q->F == 0) && (q->R == MAXSIZE - 1) || (q->F == q->R + 1)) {
     cout << "Queue Overflow\n";
     exit(1);
   }
-  if(q->F == -1 && q->R == -1){
+  if (q->F == -1 && q->R == -1) {
     q->F = 0;
     q->R = 0;
-  }
-  else if(q->R == MAXSIZE-1){
+  } else if (q->R == MAXSIZE - 1) {
     q->R = 0;
-  }
-  else{
+  } else {
     q->R++;
   }
   q->items[q->R] = val;
 }
 
-int dequeue(queue * q){
-  if(queue_empty(q)){
+int dequeue(queue *q) {
+  if (queue_empty(q)) {
     return -1;
   }
   int ele = q->items[q->F];
-  if(q->F == q->R){
+  if (q->F == q->R) {
     q->F = -1;
     q->R = -1;
-  }
-  else if(q->F == MAXSIZE-1){
+  } else if (q->F == MAXSIZE - 1) {
     q->F = 0;
-  }
-  else{
+  } else {
     q->F++;
   }
   return ele;
@@ -77,15 +71,14 @@ int dequeue(queue * q){
 //   cout << q->items[q->R];
 // }
 
-void display(queue * q){
-  while(q->F != q->R){
-    cout << q->items[q->F] << ",";
-    if(q->F > q->R){
-      if(q->F == MAXSIZE-1){
-        q->F = 0;
-      }
+void display(queue *q) {
+  int frontPointer = q->F;
+  while (frontPointer != q->R) {
+    cout << q->items[frontPointer] << ",";
+    if (frontPointer == MAXSIZE - 1) {
+      frontPointer = 0;
     }
-    q->F++;
+    frontPointer++;
   }
-  cout << q->items[q->F];
+  cout << q->items[frontPointer];
 }
