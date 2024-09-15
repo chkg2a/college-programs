@@ -18,6 +18,5 @@ int main(){
     cout << "Enter number of disks\n";
     cin>>n;
     tower(n,'A','C','B');
-
     return 0;
 }

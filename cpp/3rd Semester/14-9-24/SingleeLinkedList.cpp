@@ -6,13 +6,6 @@ typedef struct Node {
   Node *next;
 } *List;
 
-List initializeNode(){
-  List headerNode = new Node;
-  headerNode->data = 0; 
-  headerNode->next = nullptr; 
-  return headerNode;
-}
-
 List getNode(int val) {
   List node = new Node;
   node->data = val;
@@ -20,9 +13,11 @@ List getNode(int val) {
   return node;
 }
 
+List initializeNode() { return getNode(0); }
+
 void addFront(List l, int val) {
   List node = getNode(val);
-  Node *current = l;
+  List current = l;
   node->next = current->next;
   current->next = node;
 }
@@ -44,14 +39,14 @@ void displayList(List l) {
   }
 }
 
-bool listEmpty(List l){
-  if(l->next == NULL){
+bool listEmpty(List l) {
+  if (l->next == NULL) {
     return true;
   }
   return false;
 }
 
-void delFront(List l){
+void delFront(List l) {
   if (listEmpty(l)) {
     cerr << "List is empty" << endl;
     return;
@@ -60,21 +55,20 @@ void delFront(List l){
   List firstNode = head->next;
   if (firstNode->next != NULL) {
     head->next = firstNode->next;
-  }
-  else{
+  } else {
     head->next = NULL;
   }
   delete firstNode;
 }
 
-void delRear(List l){
+void delRear(List l) {
   if (listEmpty(l)) {
     cerr << "List is empty" << endl;
     return;
   }
   List current = l;
   List prev = l;
-  while(current->next != NULL){
+  while (current->next != NULL) {
     prev = current;
     current = current->next;
   }
@@ -82,17 +76,17 @@ void delRear(List l){
   delete current;
 }
 
-void destroy(List l){
-  if(listEmpty(l)){
+void destroy(List l) {
+  if (listEmpty(l)) {
     return;
   }
   List current = l;
   List nextNode = NULL;
 
   while (current != NULL) {
-      nextNode = current->next;
-      delete current;
-      current = nextNode;
+    nextNode = current->next;
+    delete current;
+    current = nextNode;
   }
   l = NULL;
 }
@@ -101,16 +95,13 @@ List listMerge(List A, List B) {
   if (listEmpty(A) && listEmpty(B)) {
     cerr << "Lists are empty" << endl;
     return nullptr;
-  }
-  else if (listEmpty(A)) {
+  } else if (listEmpty(A)) {
     cerr << "Note: List A is empty" << endl;
     return B;
-  }
-  else if (listEmpty(B)) {
+  } else if (listEmpty(B)) {
     cerr << "Note: List B is empty" << endl;
     return A;
-  }
-  else {
+  } else {
     List temp = A;
     while (temp->next != nullptr) {
       temp = temp->next;
@@ -120,19 +111,19 @@ List listMerge(List A, List B) {
   }
 }
 
-List listCopy(List L){
+List listCopy(List L) {
   if (listEmpty(L)) {
     cerr << "Lists is empty" << endl;
     return nullptr;
   }
   List newHead = getNode(0);
-  
+
   List currentNode = L->next;
-  while(currentNode->next != nullptr) {
-    addRear(newHead,currentNode->data);
+  while (currentNode->next != nullptr) {
+    addRear(newHead, currentNode->data);
     currentNode = currentNode->next;
   }
-  addRear(newHead,currentNode->data);
+  addRear(newHead, currentNode->data);
 
   return newHead;
 }
@@ -140,14 +131,14 @@ List listCopy(List L){
 int main() {
   List l = initializeNode();
   List l2 = initializeNode();
-  for (int i = 0; i < 100; i++){
-    addRear(l,i);
-    addRear(l2,i);
+  for (int i = 0; i < 100; i++) {
+    addRear(l, i);
+    addRear(l2, i);
   }
-  for (int i = 0; i < 100; i++){
+  for (int i = 0; i < 100; i++) {
     delRear(l);
   }
-  List newList = listMerge(l,l2);
+  List newList = listMerge(l, l2);
   displayList(newList);
 
   destroy(l);

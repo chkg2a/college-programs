@@ -7,7 +7,6 @@ int max_val(int [], int);
 int main(){
     int size = 9;
     int arr[size] = {8,16,44,28,4,1,3,56,12};
-    
     int largestVal = max_val(arr, size);
     cout << largestVal << endl;
     return 0;
