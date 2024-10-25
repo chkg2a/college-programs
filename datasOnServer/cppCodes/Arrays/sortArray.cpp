@@ -5,7 +5,7 @@ void sortArr(int *, int);
 void displayArr(int *, int);
 
 int main () {
-  int size = 7;
+  const int size = 7;
   int arr[size] = {12,23,4,5,1,99,9};
 
   cout << "Before sorting : ";

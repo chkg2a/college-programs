@@ -12,10 +12,22 @@ struct Queue {
   }
 };
 
-void enqueue(Queue * q){
-  if(q->R == q->F+1){
-
+void enqueue(Queue * q, int val){
+  if((q->R == q->F+1) || (q->F == 0) && (q->R == MAXSIZE-1)){
+    cout << "FULL" << endl;
+    return;
   }
+  if(q->F == -1){
+    q->F = 0;
+    q->R = 0;
+  }
+  else if(q->R == MAXSIZE - 1){
+    q->R = 0;
+  }
+  else{
+    q->R++;
+  }
+  q->data[q->R] = val;
 }
 
 

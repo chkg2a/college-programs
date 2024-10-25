@@ -4,7 +4,7 @@ using namespace std;
 int searchForEle(int [], int, int);
 
 int main () {
-  int size = 5;
+  const int size = 5;
   int arr[size] = {44,12,0,99,6};
 
   int target, reNum;
