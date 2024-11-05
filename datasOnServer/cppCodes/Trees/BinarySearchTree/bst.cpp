@@ -3,44 +3,44 @@
 using namespace std;
 
 BST addtoTree(BST root, int val) {
-        if (root == NULL) {
-      root = new Node;
-      root->data = val;
-      root->left = NULL;
-      root->right = NULL;
-    } else {
-      if (val < root->data) {
-        root->left = addtoTree(root->left, val);
-      } else {
-        root->right = addtoTree(root->right, val);
-      }
-    }
-    return root;
-  }
-  void preorderTraversal(BST root) {
-    if (root) {
-      cout << root->data << ' ';
-      preorderTraversal(root->left);
-      preorderTraversal(root->right);
-    }
-  };
-  void inorderTraversal(BST root) {
-    if (root) {
-      inorderTraversal(root->left);
-      cout << root->data << ' ';
-      inorderTraversal(root->right);
-    }
-  };
-  void postorderTraversal(BST root) {
-    if (root) {
-      postorderTraversal(root->left);
-      postorderTraversal(root->right);
-      cout << root->data << ' ';
-    }
-  };
-  BST searchTree(BST root, int val) {
+  if (root == NULL) {
+    root = new Node;
+    root->data = val;
+    root->left = NULL;
+    root->right = NULL;
+  } else {
     if (val < root->data) {
-      searchTree(root->left, val);
+      root->left = addtoTree(root->left, val);
+    } else {
+      root->right = addtoTree(root->right, val);
+    }
+  }
+  return root;
+}
+void preorderTraversal(BST root) {
+  if (root) {
+    cout << root->data << ' ';
+    preorderTraversal(root->left);
+    preorderTraversal(root->right);
+  }
+};
+void inorderTraversal(BST root) {
+  if (root) {
+    inorderTraversal(root->left);
+    cout << root->data << ' ';
+    inorderTraversal(root->right);
+  }
+};
+void postorderTraversal(BST root) {
+  if (root) {
+    postorderTraversal(root->left);
+    postorderTraversal(root->right);
+    cout << root->data << ' ';
+  }
+};
+BST searchTree(BST root, int val) {
+  if (val < root->data) {
+    searchTree(root->left, val);
   } else if (val > root->data) {
     searchTree(root->right, val);
   } else {
@@ -99,6 +99,42 @@ BST searchParent(BST root, int val) {
   }
 }
 
-void deleteNode(BST, BST);
-void deleteNode(BST, int);
-void destroyTree(BST);
+void deleteNode(BST root, BST node) {
+  BST successor, parent;
+  if (node->left == NULL && node->right == NULL) {
+    parent = searchParent(root, node->data);
+    if (parent->left == node) {
+      parent->left = NULL;
+    } else {
+      parent->right = NULL;
+    }
+    delete node;
+  } else if (node->left == NULL && node->right != NULL ||
+             node->right == NULL && node->left != NULL) {
+    parent = searchParent(root, node->data);
+    BST childNode;
+    if (node->left != NULL) {
+      childNode = node->left;
+    } else {
+      childNode = node->right;
+    }
+    if (parent->left == node) {
+      parent->left = childNode;
+    } else {
+      parent->right = childNode;
+    }
+    delete node;
+  } else {
+    successor = inorder_successor(node);
+    parent = searchParent(root, successor->data);
+    node->data = successor->data;
+    deleteNode(parent, successor);
+  }
+};
+void destroyTree(BST root) {
+  if (root) {
+    destroyTree(root->left);
+    destroyTree(root->right);
+    delete root;
+  }
+};
