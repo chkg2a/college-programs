@@ -1,9 +1,12 @@
-# List of subjects
-subjects = ["Maths", "Mechanics", "BEE", "DLD", "DSA", "PTT"]
-
-# Weights for each subject (must match the subjects list order)
-sub_weight = [4, 4, 4, 4, 5, 4]
-total_subs = len(sub_weight)
+# List of subjects with their respective weights and type (Lecture + Lab or Lecture + Tutorial)
+subjects = {
+    "Maths": {"weight": 4, "type": "Lecture + Tutorial"},
+    "Mechanics": {"weight": 4, "type": "Lecture + Tutorial"},
+    "BEE": {"weight": 4, "type": "Lecture + Lab"},
+    "DLD": {"weight": 4, "type": "Lecture + Lab"},
+    "DSA": {"weight": 5, "type": "Lecture + Lab"},
+    "PTT": {"weight": 4, "type": "Lecture + Lab"}
+}
 
 # Grades scale
 grades = {
@@ -18,96 +21,76 @@ grades = {
     'FA': 0,
 }
 
-# Initialize MidSemExam Marks (all out of 30)
-MidSemExam = {}
-for i, subject in enumerate(subjects):
-    if subject == "PTT":
-        MidSemExam[subject] = 25  # No mid-semester exam for PTT
-    elif subject == "Maths":
-        MidSemExam[subject] = 25  # Custom value for Maths
-    elif subject == "Mechanics":
-        MidSemExam[subject] = 25  # Custom value for Mechanics
-    elif subject == "BEE":
-        MidSemExam[subject] = 20  # Custom value for BEE
-    elif subject == "DLD":
-        MidSemExam[subject] = 28  # Custom value for DLD
-    elif subject == "DSA":
-        MidSemExam[subject] = 29  # Custom value for DSA
+# Initialize MidSemExam Marks (out of 30)
+MidSemExam = {
+    "Maths": 25,
+    "Mechanics": 10,
+    "BEE": 21,
+    "DLD": 23,
+    "DSA": 30,
+    "PTT": 28
+}
 
 # Initialize EndSemExam Marks (out of 50)
-EndSemExam = {}
-for i, subject in enumerate(subjects):
-    if subject == "PTT":
-        EndSemExam[subject] = 40  # No end-semester exam for PTT
-    elif subject == "Maths":
-        EndSemExam[subject] = 40  # Custom value for Maths
-    elif subject == "Mechanics":
-        EndSemExam[subject] = 40  # Custom value for Mechanics
-    elif subject == "BEE":
-        EndSemExam[subject] = 30  # Custom value for BEE
-    elif subject == "DLD":
-        EndSemExam[subject] = 45  # Custom value for DLD
-    elif subject == "DSA":
-        EndSemExam[subject] = 45  # Custom value for DSA
+EndSemExam = {
+    "Maths": 45,
+    "Mechanics": 30,
+    "BEE": 35,
+    "DLD": 45,
+    "DSA": 50,
+    "PTT": 50
+}
 
 # Initialize MidSem Assignments/Quizzes Marks (out of 10)
-MidSemAssQuiz = {}
-for i, subject in enumerate(subjects):
-    if subject == "PTT":
-        MidSemAssQuiz[subject] = 9  # Special calculation for PTT
-    elif subject == "Maths":
-        MidSemAssQuiz[subject] = 6  # Custom value for Maths
-    elif subject == "Mechanics":
-        MidSemAssQuiz[subject] = 6  # Custom value for Mechanics
-    elif subject == "BEE":
-        MidSemAssQuiz[subject] = 5  # Custom value for BEE
-    elif subject == "DLD":
-        MidSemAssQuiz[subject] = 8  # Custom value for DLD
-    elif subject == "DSA":
-        MidSemAssQuiz[subject] = 9  # Custom value for DSA
+MidSemAssQuiz = {
+    "Maths": 8,
+    "Mechanics": 9,
+    "BEE": 9,
+    "DLD": 8,
+    "DSA": 9,
+    "PTT": 7
+}
 
 # Initialize EndSem Assignments/Quizzes Marks (out of 10)
-EndSemAssQuiz = {}
-for i, subject in enumerate(subjects):
-    if subject == "PTT":
-        EndSemAssQuiz[subject] = 9  # Custom value for PTT
-    elif subject == "Maths":
-        EndSemAssQuiz[subject] = 6  # Custom value for Maths
-    elif subject == "Mechanics":
-        EndSemAssQuiz[subject] = 6  # Custom value for Mechanics
-    elif subject == "BEE":
-        EndSemAssQuiz[subject] = 4  # Custom value for BEE
-    elif subject == "DLD":
-        EndSemAssQuiz[subject] = 8  # Custom value for DLD
-    elif subject == "DSA":
-        EndSemAssQuiz[subject] = 9  # Custom value for DSA
+EndSemAssQuiz = {
+    "Maths": 7,
+    "Mechanics": 9,
+    "BEE": 9,
+    "DLD": 8,
+    "DSA": 10,
+    "PTT": 10
+}
 
 # Initialize Practical Exams Marks (out of 50)
-PracExam = {}
-for i, subject in enumerate(subjects):
-    if subject == "PTT":
-        PracExam[subject] = 50  # Custom value for PTT
-    elif subject == "Maths":
-        PracExam[subject] = None  # No practical exam for Maths
-    elif subject == "Mechanics":
-        PracExam[subject] = None  # Custom value for Mechanics
-    elif subject == "BEE":
-        PracExam[subject] = 35  # Custom value for BEE
-    elif subject == "DLD":
-        PracExam[subject] = 40  # Custom value for DLD
-    elif subject == "DSA":
-        PracExam[subject] = 50  # No practical exam for DSA
+PracExam = {
+    "Maths": None,
+    "Mechanics": None,
+    "BEE": 35,
+    "DLD": 45,
+    "DSA": 50,
+    "PTT": 50
+}
 
+# Calculate final marks with updated weightage
 final_marks = {}
 
-for subject in subjects:
-    if subject in PracExam and PracExam[subject] is not None:
-        # Subjects with Practical exams, calculate average from 150 marks
-        final_marks[subject] = round((EndSemExam[subject] + MidSemExam[subject] + PracExam[subject] +
-                                MidSemAssQuiz[subject] + EndSemAssQuiz[subject]) / 1.5,2)
-    else:
-        # Subjects without Practical exams
-        final_marks[subject] = round(EndSemExam[subject] + MidSemExam[subject] + MidSemAssQuiz[subject] + EndSemAssQuiz[subject],2)
+for subject, details in subjects.items():
+    subject_type = details["type"]
+
+    if subject_type == "Lecture + Tutorial":
+        # For subjects with Lecture + Tutorial
+        final_marks[subject] = round(
+            (MidSemAssQuiz[subject] + EndSemAssQuiz[subject])+  # 20% quizzes
+            MidSemExam[subject] +  # 30% mid-sem
+            EndSemExam[subject],   # 50% end-sem
+            2
+        )
+    elif subject_type == "Lecture + Lab":
+        # For subjects with Lecture + Lab
+        theory_component = (MidSemAssQuiz[subject] + EndSemAssQuiz[subject] +
+                            MidSemExam[subject] + EndSemExam[subject]) * 0.75  # 75% theory components
+        lab_component = PracExam[subject] * 0.50 if PracExam[subject] is not None else 0  # 25% lab component
+        final_marks[subject] = round(theory_component + lab_component, 2)
 
 # Display grades based on final marks
 scores = []
@@ -144,10 +127,10 @@ output = []
 for i in scores:
     upper_sum = 0
     lower_sum = 0
-    cgpa = 0
-    for x in range(total_subs):
-        upper_sum += grades[i[x]] * sub_weight[x]
-        lower_sum += sub_weight[x]
+    for x, (subject, details) in enumerate(subjects.items()):
+        weight = details["weight"]
+        upper_sum += grades[i[x]] * weight
+        lower_sum += weight
     cgpa = upper_sum / lower_sum
     output.append(cgpa)
 
