@@ -1,11 +1,38 @@
 # List of subjects with their respective weights and type (Lecture + Lab or Lecture + Tutorial)
+# Grade point Lecture-Theory-Practical
+MaxTheoryMarks = 100
+MaxPracMarks = 50
 subjects = {
-    "Maths": {"weight": 4, "type": "Lecture + Tutorial"},
-    "Mechanics": {"weight": 4, "type": "Lecture + Tutorial"},
-    "BEE": {"weight": 4, "type": "Lecture + Lab"},
-    "DLD": {"weight": 4, "type": "Lecture + Lab"},
-    "DSA": {"weight": 5, "type": "Lecture + Lab"},
-    "PTT": {"weight": 4, "type": "Lecture + Lab"}
+    "Maths": {"weight": 4, 
+              "type": "Lecture + Tutorial",
+              "grade-point" : "3-1-0"},
+    "Mechanics": {"weight": 4, 
+                  "type": "Lecture + Tutorial",
+              "grade-point" : "3-1-0"},
+    "BEE": {"weight": 4, 
+            "type": "Lecture + Lab",
+              "grade-point" : "3-0-2"},
+    "DLD": {"weight": 4, 
+            "type": "Lecture + Lab",
+              "grade-point" : "3-0-2"},
+    "DSA": {"weight": 5, 
+            "type": "Lecture + Lab",
+              "grade-point" : "3-0-4"},
+    "PTT": {"weight": 4, 
+            "type": "Lecture + Lab",
+              "grade-point" : "2-0-4"},
+}
+
+weight_distribution = {
+    "2-0-2": (67, 33),
+    "2-0-4": (50, 50),
+    "3-0-2": (75, 25),
+    "4-0-2": (80, 20),
+    "3-1-2": (80, 20),
+    "2-0-6": (40, 60),
+    "1-0-4": (0, 100),
+    "3-1-0": (100, 0),
+    "3-0-4": (60, 40)
 }
 
 # Grades scale
@@ -71,28 +98,26 @@ PracExam = {
     "PTT": 50
 }
 
-# Calculate final marks with updated weightage
+# Calculate final marks with updated weightage based on grade-point configuration
 final_marks = {}
 
 for subject, details in subjects.items():
-    subject_type = details["type"]
+    grade_point = details["grade-point"]
+    theory_weight, practical_weight = weight_distribution[grade_point]
+    
+    # Calculate theory component
+    theory_marks = (MidSemAssQuiz[subject] + EndSemAssQuiz[subject] +
+                    MidSemExam[subject] + EndSemExam[subject])
+    theory_component = theory_marks * (theory_weight / MaxTheoryMarks)
 
-    if subject_type == "Lecture + Tutorial":
-        # For subjects with Lecture + Tutorial
-        final_marks[subject] = round(
-            (MidSemAssQuiz[subject] + EndSemAssQuiz[subject])+  # 20% quizzes
-            MidSemExam[subject] +  # 30% mid-sem
-            EndSemExam[subject],   # 50% end-sem
-            2
-        )
-    elif subject_type == "Lecture + Lab":
-        # For subjects with Lecture + Lab
-        theory_component = (MidSemAssQuiz[subject] + EndSemAssQuiz[subject] +
-                            MidSemExam[subject] + EndSemExam[subject]) * 0.75  # 75% theory components
-        lab_component = PracExam[subject] * 0.50 if PracExam[subject] is not None else 0  # 25% lab component
-        final_marks[subject] = round(theory_component + lab_component, 2)
+    # Calculate practical component
+    practical_marks = PracExam[subject] if PracExam[subject] is not None else 0
+    practical_component = practical_marks * (practical_weight / MaxPracMarks)
 
-# Display grades based on final marks
+    # Sum up to get the final marks for the subject
+    final_marks[subject] = round(theory_component + practical_component, 2)
+
+# Display grades based on final marks and calculate CGPA
 scores = []
 m_list = []
 
@@ -135,4 +160,6 @@ for i in scores:
     output.append(cgpa)
 
 # Display CGPA
-print(f"\nCGPA - {round(output[0], 2)}")
+CGPA = round(output[0], 2)
+print(f"\nCGPA - {CGPA}")
+print(f"PC - {round(10 * CGPA - 5, 2)}%")
