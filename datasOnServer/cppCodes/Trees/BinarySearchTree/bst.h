@@ -1,13 +1,13 @@
 #ifndef BST_H
 #define BST_H
 
-struct Node {
-  Node *right;
+struct BSTNode {
+  BSTNode *right;
   int data;
-  Node *left;
+  BSTNode *left;
 };
 
-typedef struct Node * BST;
+typedef struct BSTNode * BST;
 
 BST addtoTree(BST, int);
 void preorderTraversal(BST);

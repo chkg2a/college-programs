@@ -1,10 +1,11 @@
 #include "bst.h"
 #include <iostream>
-using namespace std;
+
+using std::cout;
 
 BST addtoTree(BST root, int val) {
   if (root == NULL) {
-    root = new Node;
+    root = new BSTNode;
     root->data = val;
     root->left = NULL;
     root->right = NULL;
@@ -39,14 +40,16 @@ void postorderTraversal(BST root) {
   }
 };
 BST searchTree(BST root, int val) {
+  if (root == NULL) {
+    return NULL;
+  }
   if (val < root->data) {
-    searchTree(root->left, val);
+    return searchTree(root->left, val);
   } else if (val > root->data) {
-    searchTree(root->right, val);
+    return searchTree(root->right, val);
   } else {
     return root;
   }
-  return NULL;
 };
 BST inorder_successor(BST root) {
   BST temp = root->right;
@@ -101,7 +104,7 @@ BST searchParent(BST root, int val) {
 
 void deleteNode(BST root, BST node) {
   BST successor, parent;
-  if (node->left == NULL && node->right == NULL) {
+  if (node->right == NULL && node->left == NULL) {
     parent = searchParent(root, node->data);
     if (parent->left == node) {
       parent->left = NULL;
@@ -109,23 +112,23 @@ void deleteNode(BST root, BST node) {
       parent->right = NULL;
     }
     delete node;
-  } else if (node->left == NULL && node->right != NULL ||
-             node->right == NULL && node->left != NULL) {
-    parent = searchParent(root, node->data);
+  } else if ((node->right == NULL && node->left != NULL) ||
+             (node->right != NULL && node->left == NULL)) {
     BST childNode;
-    if (node->left != NULL) {
-      childNode = node->left;
-    } else {
+    parent = searchParent(root, node->data);
+    if (node->right != NULL) {
       childNode = node->right;
-    }
-    if (parent->left == node) {
-      parent->left = childNode;
     } else {
+      childNode = node->left;
+    }
+    if (parent->right == node) {
       parent->right = childNode;
+    } else {
+      parent->left = childNode;
     }
     delete node;
   } else {
-    successor = inorder_successor(node);
+    successor = inorder_successor(root);
     parent = searchParent(root, successor->data);
     node->data = successor->data;
     deleteNode(parent, successor);

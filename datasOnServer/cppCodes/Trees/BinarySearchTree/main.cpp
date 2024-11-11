@@ -19,20 +19,20 @@ int main() {
   cout << "\nPostorder Traversal : ";
   postorderTraversal(root);
 
-  /*cout << "\nEnter a number whose parent is to be serached\n";*/
-  /*cin >> eletobeSearched;*/
-  /*searchNode = searchParent(root, eletobeSearched);*/
-  /*if (searchNode) {*/
-  /*  cout << eletobeSearched << "'s parent is the node containing "*/
-  /*       << searchNode->data << endl;*/
-  /*} else {*/
-  /*  cout << eletobeSearched << "'s parent not found\n";*/
-  /*}*/
-  /**/
+  cout << "\nEnter a number whose parent is to be serached\n";
+  cin >> eletobeSearched;
+  searchNode = searchParent(root, eletobeSearched);
+  if (searchNode) {
+    cout << eletobeSearched << "'s parent is the node containing "
+         << searchNode->data << endl;
+  } else {
+    cout << eletobeSearched << "'s parent not found\n";
+  }
+
   cout << "\nEnter a number to be deleted from the tree\n";
   cin >> eletobeDeleted;
-  searchNode = searchParent(root, eletobeDeleted);
-  if (searchNode) {
+  searchNode = searchTree(root, eletobeDeleted);
+  if (searchNode != NULL) {
     deleteNode(root, searchNode);
     cout << "... After deletion of " << eletobeDeleted
          << " from the current BST... \n";

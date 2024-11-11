@@ -4,22 +4,16 @@ MaxTheoryMarks = 100
 MaxPracMarks = 50
 subjects = {
     "Maths": {"weight": 4, 
-              "type": "Lecture + Tutorial",
               "grade-point" : "3-1-0"},
     "Mechanics": {"weight": 4, 
-                  "type": "Lecture + Tutorial",
               "grade-point" : "3-1-0"},
     "BEE": {"weight": 4, 
-            "type": "Lecture + Lab",
               "grade-point" : "3-0-2"},
     "DLD": {"weight": 4, 
-            "type": "Lecture + Lab",
               "grade-point" : "3-0-2"},
     "DSA": {"weight": 5, 
-            "type": "Lecture + Lab",
               "grade-point" : "3-0-4"},
     "PTT": {"weight": 4, 
-            "type": "Lecture + Lab",
               "grade-point" : "2-0-4"},
 }
 
@@ -50,40 +44,40 @@ grades = {
 
 # Initialize MidSemExam Marks (out of 30)
 MidSemExam = {
-    "Maths": 25,
-    "Mechanics": 10,
-    "BEE": 21,
-    "DLD": 23,
+    "Maths": 30,
+    "Mechanics": 30,
+    "BEE": 30,
+    "DLD": 30,
     "DSA": 30,
-    "PTT": 28
+    "PTT": 30
 }
 
 # Initialize EndSemExam Marks (out of 50)
 EndSemExam = {
-    "Maths": 45,
-    "Mechanics": 30,
-    "BEE": 35,
-    "DLD": 45,
+    "Maths": 50,
+    "Mechanics": 50,
+    "BEE": 50,
+    "DLD": 50,
     "DSA": 50,
     "PTT": 50
 }
 
 # Initialize MidSem Assignments/Quizzes Marks (out of 10)
-MidSemAssQuiz = {
-    "Maths": 8,
-    "Mechanics": 9,
-    "BEE": 9,
-    "DLD": 8,
-    "DSA": 9,
-    "PTT": 7
+Quiz = {
+    "Maths": 10,
+    "Mechanics": 10,
+    "BEE": 10,
+    "DLD": 10,
+    "DSA": 10,
+    "PTT": 10
 }
 
 # Initialize EndSem Assignments/Quizzes Marks (out of 10)
-EndSemAssQuiz = {
-    "Maths": 7,
-    "Mechanics": 9,
-    "BEE": 9,
-    "DLD": 8,
+TeacherEval = {
+    "Maths": 10,
+    "Mechanics": 10,
+    "BEE": 10,
+    "DLD": 10,
     "DSA": 10,
     "PTT": 10
 }
@@ -92,8 +86,8 @@ EndSemAssQuiz = {
 PracExam = {
     "Maths": None,
     "Mechanics": None,
-    "BEE": 35,
-    "DLD": 45,
+    "BEE": 50,
+    "DLD": 50,
     "DSA": 50,
     "PTT": 50
 }
@@ -106,7 +100,7 @@ for subject, details in subjects.items():
     theory_weight, practical_weight = weight_distribution[grade_point]
     
     # Calculate theory component
-    theory_marks = (MidSemAssQuiz[subject] + EndSemAssQuiz[subject] +
+    theory_marks = (Quiz[subject] + TeacherEval[subject] +
                     MidSemExam[subject] + EndSemExam[subject])
     theory_component = theory_marks * (theory_weight / MaxTheoryMarks)
 
@@ -123,17 +117,17 @@ m_list = []
 
 for subject, mark in final_marks.items():
     # Determine the grade based on the mark
-    if mark > 84:
+    if mark > 83:
         grade = 'S'
-    elif mark > 74:
+    elif mark > 73:
         grade = 'A'
-    elif mark > 64:
+    elif mark > 63:
         grade = 'B'
-    elif mark > 54:
+    elif mark > 53:
         grade = 'C'
-    elif mark > 44:
+    elif mark > 43:
         grade = 'D'
-    elif mark > 34:
+    elif mark > 33:
         grade = 'E'
     else:
         grade = 'F'
