@@ -34,7 +34,7 @@ void inorderTraversal(BST root) {
 };
 void postorderTraversal(BST root) {
   if (root) {
-    postorderTraversal(root->left);
+   postorderTraversal(root->left);
     postorderTraversal(root->right);
     cout << root->data << ' ';
   }

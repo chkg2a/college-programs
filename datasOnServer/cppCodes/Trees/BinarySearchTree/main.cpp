@@ -24,7 +24,7 @@ int main() {
   searchNode = searchParent(root, eletobeSearched);
   if (searchNode) {
     cout << eletobeSearched << "'s parent is the node containing "
-         << searchNode->data << endl;
+         << searchNode->val << endl;
   } else {
     cout << eletobeSearched << "'s parent not found\n";
   }
