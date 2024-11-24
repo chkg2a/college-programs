@@ -15,7 +15,7 @@ cities = {
 days_in_march = 31
 num_cities = len(cities)
 
-temperature = [[random.randint(15, 40) for _ in range(num_cities)] for _ in range(days_in_march)]
+temperature = [[random.randint(10, 35) for _ in range(num_cities)] for _ in range(days_in_march)]
 
 max_temp = float('-inf')
 min_temp = float('inf')

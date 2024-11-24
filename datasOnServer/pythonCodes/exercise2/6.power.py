@@ -4,4 +4,8 @@ def power(i,j):
     return i * power(i,j-1)
 
 if __name__ == "__main__":
-    print(power(3,4))
+    base = int(input("Enter the base: "))
+    exponent = int(input("Enter the exponent (>= 1): "))
+
+    result = power(base, exponent)
+    print(f"{base} raised to the power of {exponent} is: {result}")

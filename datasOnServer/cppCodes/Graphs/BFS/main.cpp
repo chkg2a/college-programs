@@ -11,8 +11,7 @@ void BFS(int start){
     int front = 0, rear = 0;
     queue[rear++] = start;
     visited[start] = true;
-    while(front < rear){
-        int node = queue[front++];
+    while(front < rear){ int node = queue[front++];
         cout << node << " ";
         for(int i = 0; i < n; ++i){
             if(adj[node][i] && !visited[i]){

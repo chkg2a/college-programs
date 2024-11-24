@@ -14,7 +14,7 @@ BST addtoTree(BST root, int val) {
       root->left = addtoTree(root->left, val);
     } else {
       root->right = addtoTree(root->right, val);
-    }
+   }
   }
   return root;
 }

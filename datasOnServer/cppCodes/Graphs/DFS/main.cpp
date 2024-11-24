@@ -10,15 +10,14 @@ int n, m;
 void DFS(int start){
     int top = -1;
     stack[++top] = start;
+    visited[start] = true;
     while(top!= -1){
         int node = stack[top--];
-        if(!visited[node]){
-            visited[node] = true;
-            cout << node << "\t";
-            for(int i = n-1; i>=0;i--){
-                if(adj[node][i] && !visited[i]){
-                    stack[++top] =i;
-                }
+        cout << node << " ";
+        for(int i = n-1; i>=0;i--){
+            if(adj[node][i] && !visited[i]){
+                stack[++top] =i;
+                visited[i] = true;
             }
         }
     }
@@ -46,13 +45,3 @@ int main(){
     DFS(0);
     return 0;
 }
-/*
-Enter number of vertices and edges:
-5 6
-Enter edges (u, v):
-0 1
-0 2
-1 2
-1 3
-2 4
-3 4*/
