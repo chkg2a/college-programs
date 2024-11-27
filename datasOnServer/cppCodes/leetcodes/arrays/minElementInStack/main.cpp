@@ -1,7 +1,42 @@
 #include <iostream>
-#include "stack.h"
+#define MAXSIZE 100
 
 using namespace std;
+
+
+struct stack{
+    int arr[MAXSIZE];
+    int top;
+};
+void initializeStack(stack * stk){
+    stk->top = 0;
+}
+
+int isEmpty(stack * stk){
+    return (stk->top == 0);
+}
+
+int push(stack * stk, int data){
+    if(stk->top == MAXSIZE-1){
+        return -1; 
+    }
+    stk->arr[++(stk->top)] = data;
+    return 0;
+}
+
+int pop(stack * stk){
+    if(isEmpty(stk)){
+        return -1;
+    }
+    return stk->arr[stk->top--];
+}
+
+int top(stack * stk){
+    if(isEmpty(stk)){
+        return -1;
+    }
+    return stk->arr[stk->top];
+}
 
 int main(){
     stack stk;

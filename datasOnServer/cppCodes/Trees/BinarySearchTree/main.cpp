@@ -1,6 +1,7 @@
-#include "bst.h"
+#include <chkg2a/fn_bst.h>
 #include <iostream>
 using namespace std;
+using namespace chk;
 
 int main() {
   BST root = NULL, searchNode;
@@ -23,7 +24,7 @@ int main() {
   searchNode = searchParent(root, eletobeSearched);
   if (searchNode) {
     cout << eletobeSearched << "'s parent is the node containing "
-         << searchNode->data << endl;
+         << searchNode->val << endl;
   } else {
     cout << eletobeSearched << "'s parent not found\n";
   }

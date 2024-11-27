@@ -1,5 +1,5 @@
 #include <iostream>
-#define MAXSIZE 10
+#define MAXSIZE 3
 #define TRUE 1
 #define FALSE 0
 using namespace std;
@@ -18,6 +18,8 @@ int main () {
   queue q;
   q.F = -1, q.R = -1;
   enqueue(&q,10);
+  enqueue(&q,20);
+  dequeue(&q);
   enqueue(&q,20);
   enqueue(&q,30);
   // display(&q);
@@ -70,22 +72,21 @@ int dequeue(queue * q){
   return ele;
 }
 
-// void display(queue * q){
-//   for(int i=q->F;i!=q->R; i=(i+1)%MAXSIZE){
-//     cout << q->items[i] << ",";
-//   }
-//   cout << q->items[q->R];
-// }
+ void display(queue * q){
+  for(int i=q->F;i!=q->R; i=(i+1)%MAXSIZE){
+     cout << q->items[i] << ",";
+   }
+   cout << q->items[q->R];
+ }
 
-void display(queue * q){
-  while(q->F != q->R){
-    cout << q->items[q->F] << ",";
-    if(q->F > q->R){
-      if(q->F == MAXSIZE-1){
-        q->F = 0;
-      }
-    }
-    q->F++;
-  }
-  cout << q->items[q->F];
-}
+/*void display(queue * q){*/
+/*  int i = q->F;*/
+/*  while(i != q->R){*/
+/*    cout << q->items[i] << ",";*/
+/*    if(i == q->R){*/
+/*      break;*/
+/*    }*/
+/*    i = (i + 1) % MAXSIZE; // Move to the next index, wrapping around using modulo*/
+/*  }*/
+/*  cout << q->items[i];*/
+/*}*/
