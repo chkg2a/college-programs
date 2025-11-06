@@ -1,0 +1,46 @@
+class Shape{
+  double x, y;
+  Shape(){};
+  void area(){};
+}
+
+class Rectangle extends Shape {
+  Rectangle(double a, double b){
+    x = a;
+    y = b;
+  }
+  void area(){
+    System.out.println("Area of rectangle is : " + x * y);
+  }
+}
+
+class Triangle extends Shape {
+  Triangle(double a, double b){
+    x = a;
+    y = b;
+  }
+  void area(){
+    System.out.println("Area of triangle is : " + (x * y) / 2);
+  }
+}
+
+class Circle extends Shape {
+  Circle(double a){
+    x = a;
+  }
+  void area(){
+    System.out.println("Area of circle is : " + 3.14 * x * x);
+  }
+}
+
+class AreaDMD {
+  public static void main(String args[]){
+    Shape obj = new Shape();    
+    obj = new Rectangle(17,28);
+    obj.area();
+    obj = new Circle(4);
+    obj.area();
+    obj = new Triangle(50,40);
+    obj.area();
+  }
+}
